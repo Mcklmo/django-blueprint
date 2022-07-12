@@ -159,7 +159,7 @@ INSTALLED_APPS = (
     "allauth.socialaccount.providers.weibo",
     "allauth.socialaccount.providers.xing",
     "example.demo",
-    "bootstrapform",
+    # "bootstrapform",
 )
 
 
