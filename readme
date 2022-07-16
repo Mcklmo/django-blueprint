@@ -1,0 +1,11 @@
+input:
+mysql table
+
+algorithm:
+    save column names
+    user pick objective
+    user pick constraints
+    use as input for linear programming 
+
+output:
+    optimal solution 
