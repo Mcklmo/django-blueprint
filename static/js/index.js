@@ -1,0 +1,5 @@
+
+
+function load() {
+    alert("loaded")
+}
