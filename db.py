@@ -2,14 +2,15 @@ import pymysql.cursors
 
 
 # Connect to the database
-connection = pymysql.connect(host='localhost',
-                             user='root',
-                             password='root',
-                             database='sys',
+def connect(host,user,password,database):
+    return pymysql.connect(host=host,
+                             user=user,
+                             password=password,
+                             database=database,
                              cursorclass=pymysql.cursors.DictCursor)
 
 
-def insert(tbl, cols,vals):
+def insert(connection,tbl, cols,vals):
     if len(cols) != len(vals):
         raise Exception("columns and values must be the same length")
     with connection.cursor() as cursor:
@@ -21,7 +22,7 @@ def insert(tbl, cols,vals):
     # your changes.
     connection.commit()
 
-def select(tbl,cols="*",where=None):
+def select(connection,tbl,cols="*",where=None):
     # where is a string like "id=1"
     if where:
         where="WHERE "+where
@@ -32,3 +33,10 @@ def select(tbl,cols="*",where=None):
         result = cursor.fetchall()
     return result
 
+def get_tables(connection):
+    with connection.cursor() as cursor:
+        # Read a single record
+        sql = "SHOW TABLES"
+        cursor.execute(sql)
+        result = cursor.fetchall()
+    return result

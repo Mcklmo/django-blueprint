@@ -27,8 +27,17 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <p>Login
-                </p>
+                <fieldset>
+                    <legend for="db_host">Database host name</legend>
+                    <input type="text" id="db_host" name="db_host" value="localhost" />
+                    <legend for="db_user">Database user name</legend>
+                    <input type="text" id="db_user" name="db_user" value="root" />
+                    <legend for="db_pass">Database password</legend>
+                    <input type="text" id="db_pass" name="db_pass" value="root" />
+                    <legend for="db_name">Database name</legend>
+                    <input type="text" id="db_name" name="db_name" value="sys" />
+                    <button type="button" id="connect" onclick="connect()">Connect</button>
+                </fieldset>
             </div>
         </div>
     </div>
