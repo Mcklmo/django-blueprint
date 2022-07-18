@@ -13,4 +13,4 @@ output:
     optimal solution 
 """
 
-db.insert("test",["test"],["3"])
+#db.insert("test",["test"],["3"])

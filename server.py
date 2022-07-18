@@ -1,3 +1,4 @@
+from tkinter import N
 import flask 
 import json
 import db 
@@ -8,7 +9,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 # set db connection variable
-connection = None
+DB=None
 
 # get requests with file responses
 @app.route('/', methods=['GET'])
@@ -22,7 +23,10 @@ def table():
 # get requests with json responses
 @app.route('/tables/all', methods=['GET'])
 def get_tables():
-    return json.dumps(db.get_tables(connection))
+    try:
+        return json.dumps({"tables":DB.get_tables(),"success":True})
+    except Exception as e:
+        return json.dumps({"error":str(e)})
 
 # post 
 @app.route('/connect', methods=['POST'])
@@ -31,12 +35,13 @@ def connect():
     # data from post request
     try:
         data=request.json
-        print(data)
-        connection=db.connect(data["host"],data["user"],data["password"],data["database"])
+        global DB
+        DB=db.DB(data["host"],data["user"],data["password"],data["database"])
+        #print(DB)
         return flask.jsonify({"success":True})
     except Exception as e:
         print(e)
-        return flask.jsonify({"success":False,"error":"Error "+str(e)})
+        return flask.jsonify({"error":"Error "+str(e)})
 
 # run
 app.run()
